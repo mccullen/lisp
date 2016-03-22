@@ -120,13 +120,46 @@
     ((null l1) 0)
     ((null (rest l1)) (make-oned-array (first l1)))
     (t
-      (setq oned (make-oned-array (first (last l1))))
-      (setq nlist (make-n-lists ))
-      (setq new (pop-last l1))
-      ()
+      (setq l2 (reverse l1))
+      (setq retval (make-oned-array (first l2)))
+      (setq l2 (rest l1))
+      (loop for x in l2 do
+	  (setq retval (make-n-lists x retval))
+      )
+      retval
+      ;(my-make-array-auxl l1)
+      ;(construct-array l1)
+      ;(setq oned (make-oned-array (my-last l1)))
+      ;(setq nlist (make-n-lists (my-last (butlast l1)) oned))
+      ;(setq myrest (my-make-array (butlast l1)))
+      ;myrest
 
       ;(cons (my-make-array (rest l1)))
       ;(list (cons 0 (my-make-array (cons (- 1 (first l1))(rest l1)))))
+    )
+  )
+)
+
+(defun my-make-array-auxl (l1 retval)
+ (cond
+   ((null l1) nil)
+   ((null (rest l1)) )
+   (t
+     ;(my-make-array-auxl (butlast l1) retval)
+     (make-n-lists (my-last l1) retval)
+   )
+ )
+)
+
+(defun construct-array (l1)
+  (setq l2 (make-n-lists
+  	(my-last (butlast l1)) (make-oned-array (my-last l1))))
+
+  (cond
+    ((null l1) nil)
+    ((equal (length l1) 2) l2)
+    (t
+      (cons l2 (construct-array (rest l1)))
     )
   )
 )
