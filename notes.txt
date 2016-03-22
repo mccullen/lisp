@@ -1,0 +1,27 @@
+(first list)
+(rest list)
+(const elemement list)
+(list thing1 thing2...)
+(null list)
+(= value1 value2)
+(cond (condition ret1)
+	(condition ret2))
+(let*((name val)
+	(name val))
+
+(defun name(arg1, arg2 ...)
+	"Explanation"
+		...____retVal___
+
+
+tools:
+ - null
+ - cons
+ - first
+ - rest
+ - list
+ - atom
+ - cond
+ - let*
+ - print
+ - equal
