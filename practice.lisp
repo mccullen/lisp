@@ -120,9 +120,10 @@
     ((null l1) 0)
     ((null (rest l1)) (make-oned-array (first l1)))
     (t
-      (setq oned (my-make-array (rest l1)))
+      (setq oned (make-oned-array (first (last l1))))
+      (setq nlist (make-n-lists ))
       (setq new (pop-last l1))
-
+      ()
 
       ;(cons (my-make-array (rest l1)))
       ;(list (cons 0 (my-make-array (cons (- 1 (first l1))(rest l1)))))
