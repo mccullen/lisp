@@ -122,7 +122,7 @@
     (t
       (setq l2 (reverse l1))
       (setq retval (make-oned-array (first l2)))
-      (setq l2 (rest l1))
+      (setq l2 (rest l2))
       (loop for x in l2 do
 	  (setq retval (make-n-lists x retval))
       )
@@ -138,6 +138,11 @@
       ;(list (cons 0 (my-make-array (cons (- 1 (first l1))(rest l1)))))
     )
   )
+)
+
+(defun my-array-dimension (A n)
+  "Return the nth dimension of the array A"
+  
 )
 
 (defun my-make-array-auxl (l1 retval)
