@@ -142,7 +142,10 @@
 
 (defun my-array-dimension (A n)
   "Return the nth dimension of the array A"
-  
+  (my-nth A n)
+  ;(cond
+  ;  ((equal 0 n) )
+  ;)
 )
 
 (defun my-make-array-auxl (l1 retval)
