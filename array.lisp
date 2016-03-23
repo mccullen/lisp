@@ -142,9 +142,21 @@
   )
 )
 
-(defun my-array-dimension (A n)
+(defun my-array-dimension (a n)
   "Return the nth dimension of the array A"
-  (my-nth1 A n)
+  (cond 
+    ;((null a) -1)
+    ;((<= 0 n) (length a))
+    ((equal n 0)
+      (length a)
+    )
+    (t
+      ;(first (my-array-dimension a (- n 1)))
+      (my-array-dimension (first a) (- n 1))
+      ;(length (my-nth a ))
+      ;(my-array-dimension a (- n 1))
+    )
+  )
 )
 
 ;(defun my-set-aref (my-arrray item indexes)
