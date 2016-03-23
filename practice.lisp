@@ -151,6 +151,29 @@
   (my-nth1 A n)
 )
 
+(defun my-set-aref (arr item i j)
+  "Return a copy of A in which A[i,j] is set to value"
+  (cond
+    ((equal i 1)
+      (cons (replace-nth-in-1d j (first arr) item) (rest arr))
+    )
+    (t
+      (cons (first arr) (my-set-aref (rest arr) item (- i 1) j))
+    )
+  )
+
+)
+
+(defun replace-nth-in-1d (index arr item)
+  (cond
+    ((equal index 1) 
+      (cons item (rest arr)))
+    (t
+      (cons (first arr) (replace-nth-in-1d (- index 1) (rest arr) item))
+    )
+  )
+)
+
 (defun my-aref (A i j)
   "Returns A[i,j] assuming A is a 2-dimensional array"
   (setq dim (my-nth1 A i))
