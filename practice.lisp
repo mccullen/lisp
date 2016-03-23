@@ -18,6 +18,12 @@
   (cond ((null list1) 0)
 	(t (+ 1 (my-length(rest list1))))))
 
+(defun my-nth1 (list index)
+  "Returns the index-th element of list"
+  (cond ((= index 1) (first list))
+	;((null list) 'error)
+	(t (my-nth1 (rest list) (- index 1)))))
+
 (defun my-nth (list index)
   "Returns the index-th element of list"
   (cond ((= index 0) (first list))
@@ -142,10 +148,13 @@
 
 (defun my-array-dimension (A n)
   "Return the nth dimension of the array A"
-  (my-nth A n)
-  ;(cond
-  ;  ((equal 0 n) )
-  ;)
+  (my-nth1 A n)
+)
+
+(defun my-aref (A i j)
+  "Returns A[i,j] assuming A is a 2-dimensional array"
+  (setq dim (my-nth1 A i))
+  (my-nth1 dim j)
 )
 
 (defun my-make-array-auxl (l1 retval)
