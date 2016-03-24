@@ -114,75 +114,38 @@
   ;; column using my-nth into that column.
   (my-nth1 (my-nth1 my-array (first indexes)) (my-second indexes)))
 
-(defun my-make-array-auxl (l1 retval)
- (cond
-   ((null l1) nil)
-   ((null (rest l1)) )
-   (t
-     ;(my-make-array-auxl (butlast l1) retval)
-     (make-n-lists (my-last l1) retval)
-   )
- )
-)
-
-(defun construct-array (l1)
-  (setq l2 (make-n-lists
-  	(my-last (butlast l1)) (make-oned-array (my-last l1))))
-
-  (cond
-    ((null l1) nil)
-    ((equal (length l1) 2) l2)
-    (t
-      (cons l2 (construct-array (rest l1)))
-    )
-  )
-)
-
 (defun make-n-lists (a1 l1)
   "Return a list containing a1 lists of l1"
   (cond
+  ;; If a1 is 0, return nil
     ((equal 0 a1) nil)
+  ;; If a1 is 1, retun l1
     ((equal 1 a1) l1)
+  ;; Else, construct a new list of l1 tacked on to the front
+  ;; of itself a1 times.
     (t
-      (cons l1 (make-n-lists-aux (- a1 1) l1 (list l1)))
-    )
-  )
-)
+      (cons l1 (make-n-lists-aux (- a1 1) l1 (list l1))))))
 
 (defun make-n-lists-aux (a1 l1 l2)
-  "lllll"
+  "Auxiliary function for make-n-lists so that the last element
+   retains the right number of parens."
   (cond
+  ;; If a1 is 0, retun nil
     ((equal 0 a1) nil)
+  ;; If is a1 is 1, retun l2
     ((equal 1 a1) l2)
     (t
-      (cons l1 (make-n-lists-aux (- a1 1) l1 l2))
-    )
-  )
-)
+  ;; Else, return l1 constructed onto l2 a1 times.
+      (cons l1 (make-n-lists-aux (- a1 1) l1 l2)))))
 
-
-(defun make-n-oned-arrays (a1 a2)
-  "Make a1 one-d arrays with a2 elements"
-  (cond
-  ;; If the 
-    ((equal 1 a1) (make-oned-array a2))
-    (t
-      (cons (make-oned-array a2) (make-n-oned-arrays (- a1 1) a2)))))
-
-(defun my-make-array-aux (l1)
-  "Make array aux"
-  (cond
-    ((null l1) nil)
-    ()
-  )
-)
 
 (defun make-oned-array (a1)
   "Make a 1d array of with a1 elements"
   (cond
+  ;; If a1 is 0, return nil
     ((equal 0 a1) nil)
+  ;; If a1 is 1, return a list of 0
     ((equal a1  1) (list 0))
-    (t (cons 0 (make-oned-array (- a1 1))))
-  )
-)
+  ;; Else, construct 0 onto a list a1 times.
+    (t (cons 0 (make-oned-array (- a1 1))))))
 

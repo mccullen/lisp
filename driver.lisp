@@ -21,6 +21,17 @@
 ;;; Test my-array-dimension
 
 (print "=> Testing (my-array-dimension (my-array nth-dimension))")
+(print "(setf arr (my-make-array '(5 4 7 4)))")
+(setf arr (my-make-array '(5 4 7 4)))
+(print "(my-array-dimension arr 0)")
+(print (my-array-dimension arr 0))
+(print "(my-array-dimension arr 1)")
+(print (my-array-dimension arr 1))
+(print "(my-array-dimension arr 2)")
+(print (my-array-dimension arr 2))
+(print "(my-array-dimension arr 3)")
+(print (my-array-dimension arr 3))
+
 
 ;;; Test my-aref
 
