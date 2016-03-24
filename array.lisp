@@ -112,4 +112,3 @@
     ((equal a1  1) (list 0))
   ;; Else, construct 0 onto a list a1 times.
     (t (cons 0 (make-oned-array (- a1 1))))))
-
