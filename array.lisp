@@ -51,14 +51,11 @@
   (cond
     ((null l1) 0)
     ((null (rest l1)) (make-oned-array (first l1)))
+    ((equal (first l1) 1)
+      (list (my-make-array (rest l1)))
+    )
     (t
-      (setq l2 (reverse l1))
-      (setq retval (make-oned-array (first l2)))
-      (setq l2 (rest l2))
-      (loop for x in l2 do
-          (setq retval (make-n-lists x retval))
-      )
-      retval
+      (cons (my-make-array (rest l1)) (my-make-array (cons (- (first l1) 1) (rest l1))))
     )
   )
 )
