@@ -38,34 +38,37 @@
   "If l1 is a list of key-value pairs,
    return the pair that has the key"
    (cond 
-   ; If the key is in the first key-value pair
+   ;; If the key is in the first key-value pair
      ((null l1) nil)
+   ;; If the key is equal to the first of the first of l1, 
+   ;; return the first
      ((equal key (first (first l1)))
        (first l1))
      (t (my-assoc key (rest l1)))))
 
 (defun my-make-array (l1)
+  "Make an array of the dimensions specified in l1"
   (cond
     ((null l1) 0)
     ((null (rest l1)) (make-oned-array (first l1)))
     (t
-      (cons )
-      ;(setq l2 (reverse l1))
-      ;(setq retval (make-oned-array (first l2)))
-      ;(setq l2 (rest l2))
-      ;(loop for x in l2 do
-      ;    (setq retval (make-n-lists x retval))
-      ;)
-      ;retval
+      (setq l2 (reverse l1))
+      (setq retval (make-oned-array (first l2)))
+      (setq l2 (rest l2))
+      (loop for x in l2 do
+          (setq retval (make-n-lists x retval))
+      )
+      retval
     )
   )
 )
 
 (defun my-array-dimension (a n)
-  "Return the nth dimension of the array A"
+  "Return the nth dimension of the array a"
   (cond 
     ;((null a) -1)
     ;((<= 0 n) (length a))
+    ; If the index is 0, return the lenth of the array
     ((equal n 0)
       (length a)
     )
@@ -79,38 +82,37 @@
 )
 
 (defun my-set-aref (my-array item indexes)
-  "Return a copy of A in which A[i,j] is set to value"
+  "Return a copy of my-array in which my-array[i,j] is set to value, i
+   being the first element in indexes and j being the second."
   (cond
+  ;; If the first index is 0, extract the row and input the item into it.
     ((equal (first indexes) 1)
       (cons (replace-nth-in-1d (my-second indexes) 
-        (first my-array) item) (rest my-array))
-    )
+        (first my-array) item) (rest my-array)))
+  ;; Else, recurse down to find the right row.
     (t
       (cons (first my-array) (my-set-aref (rest my-array)
-        item (cons (- (first indexes) 1) (rest indexes))))
-    )
-  )
-
-)
+        item (cons (- (first indexes) 1) (rest indexes)))))))
 
 (defun replace-nth-in-1d (index arr item)
+  "Return a copy of arr in which arr[index] is set to item."
   (cond
+  ;; If the index is 1, replace the first item.
     ((equal index 1) 
       (cons item (rest arr)))
+  ;; Else, recurse to find the right place to insert the item into
+  ;; and construct the new array.
     (t
-      (cons (first arr) (replace-nth-in-1d (- index 1) (rest arr) item))
-    )
-  )
-)
+      (cons (first arr) 
+        (replace-nth-in-1d (- index 1) (rest arr) item)))))
 
 (defun my-aref (my-array indexes)
   "Returns my-array[row,column] assuming my-array is 
   a 2-dimensional array and indexes is a list of the
   form '(row column)"
-  (my-nth1 (my-nth1 my-array (first indexes)) (my-second indexes))
-  ;(setq dim (my-nth1 my-array (first indexes)))
-  ;(my-nth1 dim (my-second indexes))
-)
+  ;; Extract the row using my-nth1 and then extract the right
+  ;; column using my-nth into that column.
+  (my-nth1 (my-nth1 my-array (first indexes)) (my-second indexes)))
 
 (defun my-make-array-auxl (l1 retval)
  (cond
@@ -162,12 +164,10 @@
 (defun make-n-oned-arrays (a1 a2)
   "Make a1 one-d arrays with a2 elements"
   (cond
+  ;; If the 
     ((equal 1 a1) (make-oned-array a2))
     (t
-      (cons (make-oned-array a2) (make-n-oned-arrays (- a1 1) a2))
-    )
-  )
-)
+      (cons (make-oned-array a2) (make-n-oned-arrays (- a1 1) a2)))))
 
 (defun my-make-array-aux (l1)
   "Make array aux"
